@@ -18,9 +18,12 @@ import { Routes, Route } from 'react-router-dom';
 // contexts
 import { NavContext } from './contexts/NavContext'
 import { FBAuthContext } from './contexts/FBAuthContext';
+import { getFirestore } from 'firebase/firestore';
 
 const FirebaseApp = initializeApp(firebaseConfig)
 const FirebaseAuth = getAuth(FirebaseApp)
+const FirebaseDB = getFirestore(FirebaseApp) 
+
 
 const NavRoutes = [
   { name: "Home", goto: "/" },
