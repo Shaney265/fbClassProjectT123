@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button"
 import { useState, useEffect, useContext } from "react"
 import { FBAuthContext } from "../contexts/FBAuthContext"
 import { createUserWithEmailAndPassword } from "firebase/auth"
+import { useNavigate } from "react-router-dom"
 
 export function Signup ( props ) {
   const [ email, setEmail ] = useState("")
@@ -15,6 +16,7 @@ export function Signup ( props ) {
   const [ validPassword, setValidPassword ] = useState( false )
 
   const FBAuth = useContext( FBAuthContext)
+  const navigate = useNavigate ()
 
   useEffect( () => {
     if( email.indexOf('@') > 0 ) {
@@ -40,6 +42,8 @@ export function Signup ( props ) {
       // user is created in Firebase
       console.log(user)
       // alert user that account has been created
+      navigate("/")
+      //take the user to home screen
     })
     .catch( (error) => {
       console.log( error.code, error.message )
