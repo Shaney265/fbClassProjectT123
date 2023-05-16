@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button"
 import { useState, useEffect, useContext } from "react"
 import { FBAuthContext } from "../contexts/FBAuthContext"
 import { signInWithEmailAndPassword } from "firebase/auth"
+import { useNavigate } from "react-router-dom"
 
 export function Signin ( props ) {
   const [ email, setEmail ] = useState("")
@@ -16,6 +17,7 @@ export function Signin ( props ) {
   
 
 const FBAuth = useContext( FBAuthContext)
+const navigate = useNavigate()
 
 useEffect( () => {
   if( email.indexOf('@') > 0 ) {
@@ -37,9 +39,11 @@ useEffect( () => {
 const SigninHandler = () => {
   signInWithEmailAndPassword ( FBAuth, email, password )
   .then( ( usercredentials ) => {
-    // user is created in Firebase
+    // user is signed by checking the user credentials in Firebase
     console.log(usercredentials)
-    // alert user that account has been created
+    // alert user account has signed in
+    //take user to home page
+    navigate("/")
   })
   .catch( (error) => {
     console.log( error.code, error.message )
@@ -56,7 +60,7 @@ return (
             evt.preventDefault()
             SigninHandler()
             } }>
-            <h3>Sign in for an account</h3>
+            <h3>Sign in to your account</h3>
             <Form.Group>
               <Form.Label>Email address</Form.Label>
               <Form.Control 

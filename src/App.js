@@ -42,6 +42,8 @@ function App() {
   const [navItems, setNavItems] = useState(NavRoutes)
   const [auth, setAuth] = useState(null)
 
+// detects changes in the authentication status
+
   onAuthStateChanged( FirebaseAuth, (user) => {
     if( user ) {
       setAuth( user )
