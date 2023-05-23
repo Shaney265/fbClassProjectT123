@@ -1,10 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import  Card  from 'react-bootstrap/Card';
 
 import { FBDBContext } from '../contexts/FBDBContext';
 import { useContext, useEffect, useState } from 'react';
 import {collection, doc, getDocs} from "firebase/firestore";
+
 
 export function Home () {
     const [data, setData ]= useState([])
@@ -35,7 +37,14 @@ export function Home () {
  const Columns = data.map( (book, key) =>{
     return(
         <Col md="4" key={key}>
-            <h3>{book.title}</h3>
+            <Card>
+                <Card.Body>
+                    <Card.Title> (books.title)
+
+                    </Card.Title>
+                </Card.Body>
+            </Card>
+        
         </Col>
     )
  })
