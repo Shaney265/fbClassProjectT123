@@ -8,7 +8,6 @@ import { useState, useEffect, useContext } from "react"
 import { FBAuthContext } from "../contexts/FBAuthContext"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
 
 export function Signup ( props ) {
   const [ email, setEmail ] = useState("")
