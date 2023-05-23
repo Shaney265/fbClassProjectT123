@@ -14,12 +14,12 @@ import { FBStorageContext } from '../contexts/FBStorageContext';
 export function Home () {
     const[ data, setData ] = useState([])
 
-    const FBDb = useContext(FBDBContext)
+    const FBDB = useContext(FBDBContext)
     const FBStorage = useContext( FBStorageContext )
 
     const getData = async () => {
         // get data from firestore collection called "books"
-        const querySnapshot = await getDocs( collection(FBDBContext, "books") )
+        const querySnapshot = await getDocs( collection(FBDB, "books") )
         // an array to store all the books from firestore
         let books = []
         querySnapshot.forEach( (doc) => {
