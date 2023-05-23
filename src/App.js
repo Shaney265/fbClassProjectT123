@@ -1,6 +1,9 @@
 import { firebaseConfig } from './config/Config';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from "firebase/auth"
+// import firestore
+import { getFirestore} from "firebase/firestore"
+import { getStorage } from "firebase/storage"
 import { useState } from 'react'
 
 import './App.css';

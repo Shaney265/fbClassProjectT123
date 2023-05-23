@@ -8,6 +8,7 @@ import { useState, useEffect, useContext } from "react"
 import { FBAuthContext } from "../contexts/FBAuthContext"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export function Signup ( props ) {
   const [ email, setEmail ] = useState("")
@@ -40,7 +41,7 @@ export function Signup ( props ) {
     createUserWithEmailAndPassword( FBAuth, email, password )
     .then( ( user ) => {
       // user is created in Firebase
-      console.log(user)
+      // console.log(user)
       // alert user that account has been created
       navigate("/")
       //take the user to home screen
@@ -84,7 +85,7 @@ export function Signup ( props ) {
                 type="submit" 
                 className="my-2 w-100" 
                 size="lg" 
-                disabled = { ( validEmail && validPassword ) ? false: true }
+                disabled = { ( validEmail && validPassword ) ? false : true }
               >
                 Sign up
               </Button>
