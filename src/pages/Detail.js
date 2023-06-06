@@ -10,6 +10,8 @@ import { FBStorageContext } from '../contexts/FBStorageContext';
 import { AuthContext } from '../contexts/AuthContext';
 
 import { doc, getDoc } from "firebase/firestore";
+import { ref, getDownloadURL } from "firebase/storage";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export function Detail(props) {
   const [bookData, setBookData] = useState()
@@ -17,10 +19,11 @@ export function Detail(props) {
   let { bookId } = useParams()
 
   const FBDb = useContext(FBDbContext)
+  const FBStorage = useContext(FBStorageContext)
 
   const bookRef = doc(FBDb, "books", bookId)
 
-  const getBook = async (id) => {
+  const getBook = async () => {
     let book = await getDoc(bookRef)
     if (book.exists()) {
       setBookData(book.data())
@@ -36,14 +39,32 @@ export function Detail(props) {
     }
   })
 
+  const Image = ( props ) => {
+    const [imgPath,setImgPath] = useState()
+    const imgRef = ref( FBStorage, `book_cover/${ props.path }`)
+    getDownloadURL( imgRef ).then( (url) => setImgPath(url) )
+
+    return(
+        <img src={imgPath} />
+    )
+  }
+
+
   if (bookData) {
     return (
       <Container>
         <Row>
           <Col>
-            <h2>{bookId}</h2>
+            <Image path={bookData.image} />
           </Col>
-          <Col>Right</Col>
+          <Col>
+            <h2>{bookData.title}</h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h3>Write a review</h3>
+          </Col>
         </Row>
       </Container>
     )
