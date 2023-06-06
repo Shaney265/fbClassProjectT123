@@ -6,7 +6,7 @@ import { ReviewForm } from '../components/ReviewForm';
 import { useParams } from 'react-router-dom'
 
 import { useContext, useState, useEffect } from 'react';
-import { FBDbContext } from '../contexts/FBDbContext';
+import { FBDBContext } from '../contexts/FBDBContext';
 import { FBStorageContext } from '../contexts/FBStorageContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { FBAuthContext } from '../contexts/FBAuthContext';
@@ -21,7 +21,7 @@ export function Detail(props) {
 
   let { bookId } = useParams()
 
-  const FBDb = useContext(FBDbContext)
+  const FBDB = useContext(FBDBContext)
   const FBStorage = useContext(FBStorageContext)
   const FBAuth = useContext(FBAuthContext)
 
@@ -36,7 +36,7 @@ export function Detail(props) {
     }
   })
 
-  const bookRef = doc(FBDb, "books", bookId)
+  const bookRef = doc(FBDB, "books", bookId)
 
   const getBook = async () => {
     let book = await getDoc(bookRef)

@@ -16,7 +16,7 @@ export function Signup ( props ) {
   const [ validPassword, setValidPassword ] = useState( false )
 
   const FBAuth = useContext( FBAuthContext)
-  const navigate = useNavigate()
+  const navigate = useNavigate ()
 
   useEffect( () => {
     if( email.indexOf('@') > 0 ) {
@@ -43,6 +43,7 @@ export function Signup ( props ) {
       // console.log(user)
       // alert user that account has been created
       navigate("/")
+      //take the user to home screen
     })
     .catch( (error) => {
       console.log( error.code, error.message )
