@@ -58,7 +58,7 @@ export function Detail(props) {
   const ReviewHandler = async ( reviewData ) => {
     // create a document inside firestore
     const path = `books/${bookId}/reviews`
-    const review = await addDoc( collection(FBDb, path), reviewData )
+    const review = await addDoc( collection(FBDB, path), reviewData )
   }
 
   const Image = ( props ) => {
