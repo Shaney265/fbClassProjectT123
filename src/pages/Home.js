@@ -44,9 +44,9 @@ export function Home () {
         return(
             <Col md="3" key={key} className="my-3">
                 <Card className="book-card">
-                    <Image path={book.image} />
+                    <image path={book.image} />
                     <Card.Body>
-                        <Card.Title>{books.title}</Card.Title>
+                        <Card.Title>{book.title}</Card.Title>
                     </Card.Body>
                     <a href={"/detail/"+book.id} className="card-link"></a>
                 </Card>
