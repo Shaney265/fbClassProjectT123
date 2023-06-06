@@ -21,13 +21,15 @@ import { Routes, Route } from 'react-router-dom';
 // contexts
 import { NavContext } from './contexts/NavContext'
 import { FBAuthContext } from './contexts/FBAuthContext';
-import { FBDbContext } from './contexts/FBDbContext'
-import { FBStorageContext } from './contexts/FBStorageContext';
+
+import {FBDBContext} from './contexts/FBDBContext';
+
+import{FBStorageContext} from './contexts/FBStorageContext';
 
 const FirebaseApp = initializeApp(firebaseConfig)
 const FirebaseAuth = getAuth(FirebaseApp)
-const FirebaseDB = getFirestore(FirebaseApp)
-const FirebaseStorage = getStorage(FirebaseApp)
+const FirebaseDB = getFirestore(FirebaseApp) 
+
 
 const NavRoutes = [
   { name: "Home", goto: "/" },
@@ -49,6 +51,8 @@ function App() {
   const [navItems, setNavItems] = useState(NavRoutes)
   const [auth, setAuth] = useState(null)
 
+// detects changes in the authentication status
+
   onAuthStateChanged( FirebaseAuth, (user) => {
     if( user ) {
       setAuth( user )
@@ -66,8 +70,9 @@ function App() {
         <Header />
       </NavContext.Provider>
       <FBAuthContext.Provider value={FirebaseAuth}>
-      <FBDbContext.Provider value={FirebaseDB}>
-      <FBStorageContext.Provider value={FirebaseStorage}>
+      <FBDBContext.Provider value={FirebaseDB}>
+
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -76,11 +81,11 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signout" element={ <SignOut/> } />
-          <Route path="/detail/:bookId" element={ <Detail/> } />
         </Routes>
-      </FBStorageContext.Provider>
-      </FBDbContext.Provider>
+
+      </FBDBContext.Provider> 
       </FBAuthContext.Provider>
+
     </div>
   );
 }
