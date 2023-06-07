@@ -37,7 +37,19 @@ export function Detail(props) {
     }
   })
 
-  const bookRef = doc(FBDb, "books", bookId)
+  const getReviews = async () => {
+    const path = `books/${bookId}/reviews`
+    const querySnapshot = await getDocs( collection(FBDb, path) )
+    let reviews = []
+    querySnapshot.forEach( (item) => {
+      let review = item.data()
+      review.id = item.id
+      reviews.push( review )
+    })
+    setBookReviews( reviews )
+  }
+
+  const bookRef = doc(FBDB, "books", bookId)
 
   const getBook = async () => {
     let book = await getDoc(bookRef)
