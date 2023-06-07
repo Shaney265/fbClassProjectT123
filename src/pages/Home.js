@@ -7,7 +7,8 @@ import { useContext, useEffect, useState } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 
-import { FBDbContext } from '../contexts/FBDbContext';
+//import { FBDbContext } from '../contexts/FBDbContext';
+import { FBDBContext } from '../contexts/FBDBContext';
 import { FBStorageContext } from '../contexts/FBStorageContext';
 
 import '../styles/Home.css'
@@ -15,12 +16,12 @@ import '../styles/Home.css'
 export function Home () {
     const[ data, setData ] = useState([])
 
-    const FBDb = useContext(FBDbContext)
+    const FBDB = useContext(FBDBContext)
     const FBStorage = useContext( FBStorageContext )
 
     const getData = async () => {
         // get data from firestore collection called "books"
-        const querySnapshot = await getDocs( collection(FBDb, "books") )
+        const querySnapshot = await getDocs( collection(FBDB, "books") )
         // an array to store all the books from firestore
         let books = []
         querySnapshot.forEach( (doc) => {
@@ -38,7 +39,6 @@ export function Home () {
             getData()
         }
     })
-
     const Image = ( props ) => {
         const [imgPath,setImgPath] = useState()
         const imgRef = ref( FBStorage, `book_cover/${ props.path }`)
@@ -48,6 +48,7 @@ export function Home () {
             <Card.Img variant="top" src={imgPath} className="card-image" />
         )
     }
+
 
     const Columns = data.map( (book, key) => {
         return(

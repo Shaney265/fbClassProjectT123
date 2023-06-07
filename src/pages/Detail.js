@@ -6,7 +6,7 @@ import { ReviewForm } from '../components/ReviewForm';
 import { useParams } from 'react-router-dom'
 
 import { useContext, useState, useEffect } from 'react';
-import { FBDbContext } from '../contexts/FBDbContext';
+import { FBDBContext } from '../contexts/FBDBContext';
 import { FBStorageContext } from '../contexts/FBStorageContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { FBAuthContext } from '../contexts/FBAuthContext';
@@ -22,7 +22,7 @@ export function Detail(props) {
 
   let { bookId } = useParams()
 
-  const FBDb = useContext(FBDbContext)
+  const FBDB = useContext(FBDBContext)
   const FBStorage = useContext(FBStorageContext)
   const FBAuth = useContext(FBAuthContext)
 
@@ -36,18 +36,6 @@ export function Detail(props) {
       setAuth(null)
     }
   })
-
-  const getReviews = async () => {
-    const path = `books/${bookId}/reviews`
-    const querySnapshot = await getDocs( collection(FBDb, path) )
-    let reviews = []
-    querySnapshot.forEach( (item) => {
-      let review = item.data()
-      review.id = item.id
-      reviews.push( review )
-    })
-    setBookReviews( reviews )
-  }
 
   const bookRef = doc(FBDb, "books", bookId)
 
@@ -72,7 +60,7 @@ export function Detail(props) {
   const ReviewHandler = async ( reviewData ) => {
     // create a document inside firestore
     const path = `books/${bookId}/reviews`
-    const review = await addDoc( collection(FBDb, path), reviewData )
+    const review = await addDoc( collection(FBDB, path), reviewData )
   }
 
   const Image = ( props ) => {
